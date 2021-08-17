@@ -20,6 +20,7 @@ This code contains an implementation of the Landsat-8 fire detection algorithm b
         * [Weighted Means](#weighted-means)
         * [Weighted Standard Deviation](#weighted-standard-deviation)
       - [Edge handling](#edge-handling)
+   * [Future updates](#future-updates)
 
 ## Installation and running
 
@@ -202,4 +203,10 @@ In the case of LandsatFire, this type of behaviour is particularly important for
 
 <img src="https://github.com/horizonmaps/landsatfire/blob/main/Images/Landsat%20Fire%20Boundary%20Image.jpg" width="500">
 
-
+## Future updates
+Please note that the code is still in development. There are a number of areas that will be potentially added in future releases, incuding:
+* Batch text file reading
+* Pure GDAL implementation
+* Non-standard file names
+* Multi-threading
+* Image plotting
