@@ -69,6 +69,10 @@ LandsatFire, by default, will return an ESRI Shapefile (.shp) with polygons cont
 |Unambiguous|2|Pixel locations identified as likely containing unambiguous fires.|
 |Potential Fire|3|Pixel locations where potential fires have been detected, based on analysis over a 61x61 pixel moving window of background pixels.|
 
+An example image from QGIS showing the different pixel classes is shown below:
+
+<img src = "https://github.com/horizonmaps/landsatfire/blob/main/Images/Landsat%20Pixel%20Classes%20Diagram-01.jpg" width="1000">
+
 ## Warnings
 
 The code performs a number of basic 'sanity checks' during file loading to ensure that the input files are, at least superficially, appropriate for use in the later calculation steps. These include checking that all bands are the same size and that no dimension of the image is less than 61 pixels in size. 
