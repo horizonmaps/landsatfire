@@ -37,7 +37,7 @@ LandsatFire can be run from the command line or using a GUI. When running the co
 python landsatfire.py writevals=True mask_edges=False
 ```
 
-will (a) **not** mask the outermost 30 pixels of the array as background pixels, irrespective of their values (see SECTION below) and (b) write the classified array of pixel values as a GeoTiff file to disk. Irrespective of the writevals setting, a shapefile containing the classified pixel values will be created. All output files are created in the same folder as the input Landsat bands. 
+will (a) **not** mask the outermost 30 pixels of the array as background pixels, irrespective of their values (see [Edge handling](#edge-handling) below) and (b) write the classified array of pixel values as a GeoTiff file to disk. Irrespective of the writevals setting, a shapefile containing the classified pixel values will be created. All output files are created in the same folder as the input Landsat bands. 
 
 All of the above libraries can be installed using the Anaconda Python distribution. 
 
@@ -110,13 +110,6 @@ Most of the internal calculations within LandsatFire are performed using NumPy l
 
 The calculation of **potential fire** pixel locations is more complex; the original algorithm by Schroeder et al. (2016) requires calculation of the mean and standard deviation of band 7 and the band 7/5 ratio from valid background pixels over a 61x61 pixel moving window. This calculation can be performed trivially by looping over both axes of each array, but this approach is **extremely** slow and computationally inefficient. 
 
-To perform this calculation, I instead developed a fully vectorised solution, using the uniform filter function from SciPy’s multidimensional image processing library (scipy.ndimage.uniform_filter) on a 61x61 window size. There were two key aspects to this implementation: weighting the calculation, and calculating standard deviations.
-
-```python
-b7_means = nd.uniform_filter(mask_band7,size=61)
-b7_means /= weights
-```
-
 To perform this calculation, I instead developed a fully vectorised solution, using the uniform filter function from SciPy’s multidimensional image processing library ([scipy.ndimage.uniform_filter](https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.uniform_filter.html)) on a 61x61 window size. There were two key aspects to this implementation: weighting the calculation, and calculating standard deviations.
 
 #### Weighting the calculation
@@ -134,6 +127,7 @@ Masked versions of band 7 and the band 7/5 ratio were also created separately (_
 ##### Weighted Means
 
 Calculating weighted means for band 7 and the band 7/5 ratio was fairly straightforward. The uniform filter was applied to the masked version of each band, and the result was divided by the weights array, for example:
+
 ```python
 b7_means = nd.uniform_filter(mask_band7,size=61)
 b7_means /= weights
