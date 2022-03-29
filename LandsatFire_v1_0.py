@@ -202,7 +202,7 @@ def check_shapes():
     """
     shapes_list = (band1.shape,band2.shape,band3.shape,band4.shape,band5.shape,band6.shape,band7.shape)
 
-    shape_test = shapes_list.count[shapes_list[0]] == len(shapes_list)
+    shape_test = shapes_list.count(shapes_list[0]) == len(shapes_list)
     
     size_test = shapes_list[0][0]<61 or shapes_list[0][1]<61
     
