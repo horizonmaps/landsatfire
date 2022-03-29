@@ -749,6 +749,7 @@ while feature:
 
 
 #Garbage collection 
+del in_classes
 os.remove(temp_classes)
 in_band = None
 
